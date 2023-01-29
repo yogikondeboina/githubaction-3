@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-    paths:
-      - "/githubaction-3/terraform/*"
   pull_request:
     branches:
       - main
