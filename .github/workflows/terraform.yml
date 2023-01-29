@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "/actions/terraform-azure/*"
+      - "/githubaction-3/terraform/*"
   pull_request:
     branches:
       - main
