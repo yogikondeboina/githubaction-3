@@ -1,19 +1,32 @@
-
-name: 'Terraform plan'
+name: 'terraform-plan'
 
 on:
   push:
-    branches: 
-      - "main"
+    branches:
+      - main
+    paths:
+      - "/actions/terraform-azure/*"
   pull_request:
-
-permissions:
-  contents: read
+    branches:
+      - main
+  workflow_dispatch: #this attribute will enable the manual run to the pipeline
+  workflow_call:
+    inputs:
+      ROOT_PATH:
+        type: string
+        required: true
+   
+# Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+defaults:
+  run:
+    shell: bash
 env: 
-  ARM_SUBSCRIPTION_ID: ${{ secreats.subscription_id }}
-  ARM_TENANT_ID: ${{ secreats.tenant_id }}
+  #ROOT_PATH: '${{github.workspace}}/actions/terraform-azure'
   ARM_CLIENT_ID: ${{ secreats.clint_id }}
   ARM_CLIENT_SECRET: ${{ secreats.secret }}
+  ARM_SUBSCRIPTION_ID: ${{ secreats.subscription_id }}
+  ARM_TENANT_ID: ${{ secreats.tenant_id }}
+  
 
 jobs:
   terraform_plan:
